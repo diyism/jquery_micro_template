@@ -3,4 +3,6 @@ Html inline template based on jquery
 
 It works on firefox and chrome 100+
 
+The screenshot:
+
 ![](screenshot.png)
