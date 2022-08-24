@@ -1,0 +1,109 @@
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="jquery_micro_template.js"></script>
+
+
+Welcolm, <span id="username"></span><br><br>
+
+<span style="display:none;">Take care, you must use "/* ... */" in onclick property etc. to avoid errors poped in ie.</span>
+<div id="test1" class="tpl_users">
+     <:for (var i=0;i &lt; users.length;++i)
+           {:>
+<div onMouseOver="/*=users[i].color?'this.style.color=\''+users[i].color+'\';':''*/" id="user_<:=i:>" class='tpl_user'>Name:<a href="<:=users[i].name:>"><:=users[i].name:></a></div>
+           <:}
+     :>
+<pre>'somthing\'
+else ...</pre>
+</div>
+
+You have received a message: <span id="message"></span><br><br>
+
+<div id="test2" class="tpl_users">
+</div><br>
+
+<span style="display:none;">Take care, currently you must use comparison operator "&lt;" and "&gt;", not "<" and ">"!</span>
+<div id="test3" class="tpl_names">
+     <:for (var i=0;i &lt; json.length;++i){:>
+     <:if (i &gt; 0){write.push('&lt;hr&gt;');}:>
+     <:=json[i].name:><br>
+     <:}:>
+</div><br>
+
+<span style="display:none;">Take care, you must use '*="' at both begin and end in tag property location, if you have more tag property, start with more star signs!</span>
+<div id="test4" class="tpl_checks">
+     <input type="checkbox" name="is_done" *="<:=json[0]?'checked':'':>*="  **="<:='title=%22kkk%22':>*="value="1">
+     <input type="checkbox" name="is_gone" *="<:=json[1]?'checked':'':>*=" value="1">
+     <input type="checkbox" name="is_post" *="<:=json[2]?'checked':'':>*=" value="1">
+</div><br>
+
+<span style="display:none;">Take care, you must use '*="' when setting style property!</span>
+<div id="test5" class="tpl_bids">
+<:for (var i=0;i &lt; json.length;++i){:>
+Bid price:<span *="<:if (json[i]['bid']&gt;=1) {write.push('style=%22color:red;'+(json[i]['bid']&gt;=5?'font-weight:bold;':'')+'%22');}:>*="><:=json[i]['bid']:></span><br>
+<:}:>
+</div><br>
+
+<span style="display:none;">Take care, you must keep a comment tag edtion for firefox in "select" element. PS: If you wanna set default option, in ie6 and ie7, you must add an blank option, or else looped option will has a 'selected' property, and you can't reset it by using "selected='false'", so evil IE.</span>
+<select id="test6" class="tpl_select">
+        <option value="" style="display:none;"></option>
+        <!for (var i=0;i&lt;json.length;++i){!>
+        <:for (var i=0;i&lt;json.length;++i){:>
+        <option value="<:=json[i].ID:>" *="<:=2334==json[i].ID?' selected':'':>*="><:=json[i].ChannelName:></option>
+        <:}:>
+        <!}!>
+</select><br><br>
+
+<span style="display:none;">Take care, you must user long comment tags as template delimiters in firefox and chrome.</span>
+<table id="test7" class="tpl_table"  border="1" cellspacing="0">
+  <tbody>
+<!--for (var i=0;i &lt; users.length;++i)
+        {-->
+    <tr><td><:=users[i].name:></td></tr>
+        <!--}
+-->
+  </tbody>
+</table><br>
+
+This page has been viewed <span id="visit_times"></span>&nbsp;times.
+
+<script>
+$('.tpl_user').drink();
+
+var data1={users:[{name:entity('na<me1.1')},
+                  {name:'name1.2', color:'yellow'}
+                 ]
+          };
+$('#test1').drink(data1);
+
+var data2={users:[{name:'name2.1', color:'red'},
+                  {name:'name2.2', color:'yellow'}
+                 ]
+          };
+$('#test2').drink(data2);
+
+data1.users[1].name='name1.2.changed';
+$('#test1 #user_1').drink($.extend(data1, {i:1}));
+
+var data3=[{name:'name3.1'}, {name:'name3.2'}];
+$('#test3').drink(data3);
+
+var data4=[1, 0, 1];
+$('#test4').drink(data4);
+
+var data5=[{bid:2.3}, {bid:5.3}, {bid:0.9}];
+$('#test5').drink(data5);
+
+var data6=[{ID:2332,ChannelName:'channel1'}, {ID:2333,ChannelName:'channel2'}, {ID:2334,ChannelName:'channel3'}, {ID:2335,ChannelName:'channel4'}];
+$('#test6').drink(data6);
+
+$('#test7').drink(data2);
+
+var data_odds={username:'diyism', message:'Peter nudged you.', visit_times:54321};
+$('#username,#message,#visit_times').drink(data_odds);
+</script>
+<script id="dress_sample" class="tpl_table">
+{users:[{name:'name2.1', color:'red'},
+        {name:'name2.2', color:'yellow'}
+       ]
+}
+</script>
+<script>$('#dress_sample').dress();</script>
